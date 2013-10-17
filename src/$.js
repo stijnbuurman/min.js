@@ -49,10 +49,10 @@ $ = (function (document, window, $) {
     return this;
   };
 
-  $ = function (s) {
+  $ = function (s, c) {
     // querySelectorAll requires a string with a length
     // otherwise it throws an exception
-    var r = document.querySelectorAll(s || '☺'),
+    var r = (c || document).querySelectorAll(s || '☺'),
         length = r.length;
     // if we have a single element, just return that.
     // if there's no matched elements, return a nodeList to chain from
