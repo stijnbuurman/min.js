@@ -8,6 +8,7 @@ $ = (function (document, window, $) {
       toggleClass = 'toggleClass',
       removeClass = 'removeClass',
       addClass = 'addClass',
+      hasClass = 'hasClass',
       each = [][forEach],
       // note: createElement requires a string in Firefox
       dummy = document.createElement('i');
@@ -111,6 +112,14 @@ $ = (function (document, window, $) {
     });
     return this;
   }  
+  
+  window[hasClass] = node[hasClass] = function (className) {
+    if (this.classList) {
+      return this.classList.contains(className);
+    } else {
+      return new RegExp('(^| )' + className + '( |$)', 'gi').test(this.className);
+    }
+  }
 
   $ = function (s, c) {
     // querySelectorAll requires a string with a length
