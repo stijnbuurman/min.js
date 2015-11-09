@@ -5,6 +5,9 @@ $ = (function (document, window, $) {
       nodeList = NodeList.prototype,
       forEach = 'forEach',
       trigger = 'trigger',
+      toggleClass = 'toggleClass',
+      removeClass = 'removeClass',
+      addClass = 'addClass',
       each = [][forEach],
       // note: createElement requires a string in Firefox
       dummy = document.createElement('i');
@@ -48,6 +51,66 @@ $ = (function (document, window, $) {
     });
     return this;
   };
+    
+ node[toggleClass] = function (className) {
+    if (this.classList) {
+      this.classList.toggle(className);
+    } else {
+      var classes = this.className.split(' ');
+      var existingIndex = classes.indexOf(className);
+
+      if (existingIndex >= 0){
+            classes.splice(existingIndex, 1);
+      }
+      else{
+        classes.push(className);
+      }
+
+      this.className = classes.join(' ');
+    }
+    return this;
+  }
+  
+  nodeList[toggleClass] = function (className) {
+    this[forEach](function (el) {
+      el[toggleClass](className);
+    });
+    return this;
+  }
+  
+  node[removeClass] = function (className) {
+    if (this.classList){
+      this.classList.remove(className);
+    }
+    else{
+      this.className = this.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');    
+    }
+    return this;
+  }
+
+  nodeList[removeClass] = function (className) {
+    this[forEach](function (el) {
+      el[removeClass](className);
+    });
+    return this;
+  }
+  
+  node[addClass] = function (className) {
+    if (this.classList){
+      this.classList.add(className);
+    }
+    else{
+      this.element.className += ' ' + className;
+    }
+    return this;
+  }
+
+  nodeList[addClass] = function (className) {
+    this[forEach](function (el) {
+      el[removeClass](className);
+    });
+    return this;
+  }  
 
   $ = function (s, c) {
     // querySelectorAll requires a string with a length
