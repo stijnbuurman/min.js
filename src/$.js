@@ -120,6 +120,15 @@ $ = (function (document, window, $) {
       return new RegExp('(^| )' + className + '( |$)', 'gi').test(this.className);
     }
   }
+  
+  window.attr = node.attr = function(attr,value){
+    if (typeof value === undefined) {
+      return this.getAttribute(attr);
+    } else {
+      this.setAttribute(attr,value);
+      return this;
+    }
+  }
 
   $ = function (s, c) {
     // querySelectorAll requires a string with a length
