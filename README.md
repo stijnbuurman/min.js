@@ -1,6 +1,6 @@
 # min.js
 
-A super tiny JavaScript library to execute simple DOM querying and hooking event listeners. Aims to return the raw DOM node for you to manipulate directly, using HTML5 (et al) tech like `element.classList` or `element.innerHTML`, etc.
+A tiny JQuery syntax inspired library for querying, events and some simple DOM manipulation. This is a fork of Remy Sharp's min.js which is no longer being maintained.
 
 [![Build Status](https://travis-ci.org/stijnbuurman/min.js.png?branch=master)](https://travis-ci.org/stijnbuurman/min.js)
 
@@ -11,6 +11,77 @@ var links = $('p:first-child a');
 ```
 
 If there is more than one link, the return value is `NodeList`, if there's only a single match, you have an `Element` object. So you need to have an idea of what to expect if you want to modify the DOM.
+
+## Class Manipulation
+
+### Add Class
+
+```js
+$('p:first-child a').addClass('first');
+```
+
+### Remove Class
+
+```js
+$('p:first-child a').removeClass('first');
+```
+
+### Toggle Class
+
+```js
+$('p:first-child a').toggleClass('first');
+```
+
+### Has Class
+
+```js
+$('p:first-child a').hasClass('first');
+```
+
+## Attribute Manipulation
+
+### Add/Edit Attribute
+
+```js
+$('a').attr('href','index.html');
+```
+
+### Read Attribute
+
+```js
+$('input').attr('value');
+```
+
+### Read / Edit single results
+
+```js
+$('a#some-place').href = '/some-place.html';
+```
+
+```js
+var link = $('a#some-place').href;
+```
+
+## Inserting HTML
+
+### Before
+
+```js
+$('div#title').before(html);
+```
+
+### After
+
+```js
+$('div#title').after(html);
+```
+
+### Inner
+This is just the native javascript function innerHTML.
+
+```js
+$('div#title').innerHTML = html;
+```
 
 ## Events
 
@@ -45,7 +116,7 @@ $.on('foo', function () {
 
 ### Turning off events?
 
-Current min.js has no support for turning off events (beyond `.removeEventListener` -- but even then you don't have the reference function to work with). Currently there's no plans to implement this (as I find I don't disable events very often at all) -- but I'm not closed to the idea. There's an [issue open](https://github.com/remy/min.js/pull/8), but it adds quite a bit more logic to a very small file. If there's enough :thumbsup: on the issue, I'll add it in. Equally, if you think min.js should stay simple, please :thumbsdown: -- this is useful too.
+Current min.js has no support for turning off events (beyond `.removeEventListener` -- but even then you don't have the reference function to work with). 
 
 ## Looping
 
@@ -63,18 +134,10 @@ Note: jQuery-like libraries tend to make the context `this` the element. Since w
 $('a').on('foo', bar).on('click', doclick).trigger('foobar');
 ```
 
-Also when a single element is matched, you have access to it:
-
-```js
-$('a').href = '/some-place.html';
-```
-
 ## Silent failing
 
 Like jQuery, this tiny library silently fails when it doesn't match any elements. As you might expect.
 
 # More info
 
-* Special thanks and inspired by [Andrew Lunny](http://github.com/alunny)'s [slide](http://youtu.be/ssR7SKJfcG4?t=20m14s).
-* I've started using this library in conjunction with some [microlibraries](https://github.com/remy/libraries) that I've written for data binding and XHR.
 * License: MIT / http://rem.mit-license.org
