@@ -17,6 +17,7 @@ $ = (function (document, window, $) {
       dummy = document.createElement('i');
 
   nodeList[forEach] = each;
+    node[forEach] = each;
 
   // we have to explicitly add a window.on as it's not included
   // in the Node object.
