@@ -9,6 +9,9 @@ $ = (function (document, window, $) {
       removeClass = 'removeClass',
       addClass = 'addClass',
       hasClass = 'hasClass',
+      attr = 'attr',
+      after = 'after',
+      before = 'before',
       each = [][forEach],
       // note: createElement requires a string in Firefox
       dummy = document.createElement('i');
@@ -121,13 +124,21 @@ $ = (function (document, window, $) {
     }
   }
   
-  window.attr = node.attr = function(attr,value){
+  window[attr] = node[attr] = function(attr,value){
     if (typeof value === undefined) {
       return this.getAttribute(attr);
     } else {
       this.setAttribute(attr,value);
       return this;
     }
+  }
+  
+  window[after] = node[after] = function(html){
+    this.insertAdjacentHTML('afterend', html);
+  }
+  
+  window[before] = node[before] = function(html){
+    this.insertAdjacentHTML('beforebegin', html);
   }
 
   $ = function (s, c) {
