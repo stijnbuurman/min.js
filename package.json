@@ -1,7 +1,8 @@
 {
   "name": "min.js",
   "version": "0.2.3",
-  "author": "Remy Sharp",
+  "author": "Stijn Buurman",
+  "contributors": ["Remy Sharp"],
   "dependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-uglify": "~0.1.2",
@@ -10,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/remy/min.js.git"
+    "url": "git://github.com/stijnbuurman/min.js.git"
   },
   "licenses": [
     {
